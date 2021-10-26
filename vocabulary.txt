@@ -1,0 +1,11 @@
+Id:
+btnId_Main_Nombre
+txtId_Base_Nombre
+
+Variables:
+btn_Main_Nombre
+txt_Base_Nombre
+
+@String
+txtV_Introduce
+btn_Introduce 
