@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Agenda</string>
+    <string name="txt_userName">Nombre</string>
+    <string name="txt_pass">Clave</string>
+    <string name="txt_ChangePass">Cambiar Contraseña</string>
+    <string name="checkBx_Remember">Recuérdame</string>
+    <string name="btn_LogIn">Iniciar Sesión</string>
+    <string name="btn_LogOut">Cerrar Sesión</string>
+    <string name="btn_AddRegister">Nuevo Registro</string>
+    <string name="btn_ShowList">Mostrar Listado</string>
+    <string name="btn_Exit">Salir</string>
+    <string name="btn_Cancel">Cancelar</string>
+    <string name="btn_Modify">Modificar</string>
+    <string name="btn_Erase">Borrar</string>
 </resources>
