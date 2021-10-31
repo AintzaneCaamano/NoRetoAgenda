@@ -10,7 +10,7 @@
         android:id="@+id/txtV_Main_Name"
         android:layout_width="296dp"
         android:layout_height="58dp"
-        android:text="TextView"
+        android:text="@string/txt_userName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -22,27 +22,13 @@
         android:id="@+id/txtV_Main_Pass"
         android:layout_width="296dp"
         android:layout_height="58dp"
-        android:text="TextView"
+        android:text="@string/txt_pass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.558" />
-
-    <EditText
-        android:id="@+id/edTxt_Main_Pass"
-        android:layout_width="294dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.665" />
 
     <EditText
         android:id="@+id/edTxt_Main_Name"
@@ -62,7 +48,7 @@
         android:id="@+id/checkBx_Main_Remember"
         android:layout_width="294dp"
         android:layout_height="62dp"
-        android:text="CheckBox"
+        android:text="@string/checkBx_Remember"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
@@ -86,7 +72,7 @@
         android:id="@+id/btn_Main_English"
         android:layout_width="71dp"
         android:layout_height="54dp"
-        android:text="Button"
+        android:text="@string/btn_English"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.891"
@@ -98,12 +84,25 @@
         android:id="@+id/btn_Main_Spanish"
         android:layout_width="71dp"
         android:layout_height="54dp"
-        android:text="Button"
+        android:text="@string/btn_Spanish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.658"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.038" />
+
+    <EditText
+        android:id="@+id/edTxt_Main_Pass"
+        android:layout_width="295dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.656" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

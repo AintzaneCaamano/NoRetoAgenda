@@ -26,6 +26,8 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     }
     private  Context CONTEXT;
     public static final int fifthActivity = 5;
+    private  TextView txtViewName;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
        // super(itemView);
@@ -37,16 +39,17 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_layout, parent, false);
         }
         // Lookup view for data population
-        TextView txtView= (TextView) convertView.findViewById(R.id.txtV_listviewlyo_name);
-        txtView.setOnClickListener((View.OnClickListener) this);
+        txtViewName= (TextView) convertView.findViewById(R.id.txtV_listviewlyo_name);
+        txtViewName.setOnClickListener((View.OnClickListener) this);
         // Populate the data into the template view using the data object
-        txtView.setText(task.getName());
+        txtViewName.setText(task.getName());
         // Return the completed view to render on screen
         return convertView;
     }
 
     @Override
     public void onClick(View v) {
-      //Intent intento = new Intent(CONTEXT, RegisterActivity.class);//startActivityForResult(intento, fifthActivity);
+      //Intent intento = new Intent(CONTEXT, RegisterActivity.class);
+        // startActivityForResult(intento, fifthActivity);
     }
 }

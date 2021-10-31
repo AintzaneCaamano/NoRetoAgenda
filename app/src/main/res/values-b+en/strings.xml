@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Planner</string>
+    <string name="txt_userName">Name</string>
+    <string name="txt_pass">Password</string>
+    <string name="txt_ChangePass">Change Password</string>
+    <string name="checkBx_Remember">Remember Me</string>
+    <string name="btn_LogIn">Log In</string>
+    <string name="btn_LogOut">Log Out</string>
+    <string name="btn_AddRegister">New Record</string>
+    <string name="btn_ShowList">Show List</string>
+    <string name="btn_Exit">Exit</string>
+    <string name="btn_Cancel">Cancel</string>
+    <string name="btn_Modify">Modify</string>
+    <string name="btn_Erase">Delete</string>
+    <string name="btn_Register">Register</string>
+    <string name="txt_taskTitle">Task:</string>
+    <string name="txt_taskName">Task Name</string>
+    <string name="txt_Description">Description</string>
+    <string name="txt_Date">Date</string>
+    <string name="txt_Cost">Cost</string>
+    <string name="btn_DoneTasks">Finished Tasks</string>
+    <string name="btn_PendingTasks">Pending Tasks</string>
+    <string name="btn_English">English</string>
+    <string name="btn_Spanish">Spanish</string>
+</resources>

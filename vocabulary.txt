@@ -59,17 +59,61 @@ spinner_Detail_Done
 
 
 *****View List*****************
+txtV_listviewlyo_name
 
 --------------------------------------------------------------
------Variables:------------------------------------------------
+-----Variables en .java:------------------------------------------------
 --------------------------------------------------------------
+*****Main*****************
 
-btn_Main_Nombre
-txt_Base_Nombre
+buton
+
+
+*****Base*****************
+
+btnList
+btnExit
+btnRegister
+
+
+*****Register*****************
+
+btnRegister
+btnCancel
+
+
+*****List*****************
+
+btnCancel
+btnDone
+btnPending
+
+
+*****Detail*****************
+
+btnDelete
+btnModify
+btnExit
+
+
+*****TaskAdapter*****************
+
+txtViewName
+
 
 --------------------------------------------------------------
 -----@String--------------------------------------------------
 --------------------------------------------------------------
 
-txtV_Introduce
-btn_Introduce 
+txt_userName
+txt_pass
+txt_ChangePass
+checkBx_Remember
+btn_LogIn
+btn_LogOut
+btn_AddRegister
+btn_ShowList
+btn_Exit
+btn_Cancel
+btn_Modify
+btn_Erase
