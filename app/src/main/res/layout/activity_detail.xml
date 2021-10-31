@@ -157,7 +157,7 @@
         app:layout_constraintVertical_bias="0.933" />
 
     <Button
-        android:id="@+id/btn_Detail_Modify3"
+        android:id="@+id/btn_Detail_Modify"
         android:layout_width="123dp"
         android:layout_height="57dp"
         android:text="Button"
