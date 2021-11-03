@@ -3,10 +3,15 @@ package com.example.agenda.adapters;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import com.example.agenda.BaseActivity;
 import com.example.agenda.DetailActivity;
+import com.example.agenda.ListActivity;
 import com.example.agenda.MainActivity;
 import com.example.agenda.R;
+import com.example.agenda.RegisterActivity;
 import com.example.agenda.objetos.Task;
 
 
@@ -21,17 +26,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListener {
-    public TaskAdapter(Context context, ArrayList<Task> tasks2) {
-        super(context, 0, tasks2);
-    }
-    private  Context CONTEXT;
     public static final int fifthActivity = 5;
     private  TextView txtViewName;
+    private Context context;
+
+    public TaskAdapter(Context context, ArrayList<Task> tasks2) {
+        super(context, 0, tasks2);
+        this.context = context;
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
        // super(itemView);
-        CONTEXT = parent.getContext();
         // Get the data item for this position
         Task task = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -46,10 +53,9 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
         // Return the completed view to render on screen
         return convertView;
     }
-
     @Override
     public void onClick(View v) {
-      //Intent intento = new Intent(CONTEXT, RegisterActivity.class);
-        // startActivityForResult(intento, fifthActivity);
+      Intent intento = new Intent(context, RegisterActivity.class);
+        ((ListActivity)context).startActivityForResult(intento, fifthActivity);
     }
 }

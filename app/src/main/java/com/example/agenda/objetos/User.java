@@ -1,21 +1,26 @@
 package com.example.agenda.objetos;
 
-import java.util.ArrayList;
-
 public class User {
+
+    // Atributos
     private int code;
     private String name;
     private String pass;
-    private boolean rememberMe;
-    private ArrayList<Task> tasks = new ArrayList();
+    private boolean remember;
 
-    public User(int code, String name, String pass, boolean rememberMe) {
-        this.code=code;
+    // Constructor
+    public User(int code, String name, String pass, boolean remember) {
+        this.code = code;
         this.name = name;
         this.pass = pass;
-        this.rememberMe = rememberMe;
+        this.remember = remember;
     }
 
+    public User() {
+
+    }
+
+    // Métodos get y set
     public int getCode() {
         return code;
     }
@@ -40,35 +45,11 @@ public class User {
         this.pass = pass;
     }
 
-    public boolean isRememberMe() {
-        return rememberMe;
+    public boolean isRemember() {
+        return remember;
     }
 
-    public void setRememberMe(boolean rememberMe) {
-        this.rememberMe = rememberMe;
-    }
-
-    public ArrayList<Task> shareTasks(){
-        return this.tasks;
-
-    }
-    public void addTask(Task task){
-        tasks.add(task);
-    }
-
-    public void eraseAllTasks(){
-        tasks.clear();
-    }
-
-    public void eraseOneTask(Task task){
-      for(int i = 0 ; i<this.tasks.size(); i++){
-          if ((this.tasks.get(i).getCode()) == task.getCode()){
-              this.tasks.remove(i);
-          }
-      }
-    }
-
-    public void orderTasks(){
-
+    public void setRemember(boolean remember) {
+        this.remember = remember;
     }
 }
