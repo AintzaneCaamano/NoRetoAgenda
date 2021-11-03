@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DataManager extends SQLiteOpenHelper {
-
     private final Context context;
 
     // Nombre de la database
@@ -69,6 +68,10 @@ public class DataManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TASK);
+
+        sqLiteDatabase.execSQL("INSERT INTO " + USER_TABLE_NAME + " (COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PASSWORD, COLUMN_USER_REMEMBER) VALUES(1, alba, alba, si)" );
+        sqLiteDatabase.execSQL("INSERT INTO " + USER_TABLE_NAME + " (COLUMN_USER_ID, COLUMN_USER_NAME, COLUMN_USER_PASSWORD, COLUMN_USER_REMEMBER) VALUES(2, aintzane, aintzane, si)" );
+
     }
 
     @Override
@@ -93,11 +96,18 @@ public class DataManager extends SQLiteOpenHelper {
 
     }
 
-//    public boolean m_ContraseniaCorrecta(String username, String pass) {
-//
-//
-//
-//
-////}
+    public boolean m_ContraseniaCorrecta(String username, String pass) {
 
+        SQLiteDatabase myDB = this.getWritableDatabase();
+
+        String s;
+        Cursor cursor = myDB.rawQuery("select * from USER_TABLE NAME where " + username + " =? and" + pass + " =?", null);
+
+        if(cursor.getCount()>0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
