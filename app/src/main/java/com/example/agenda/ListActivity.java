@@ -22,13 +22,10 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnCancel;
     private Button btnDone;
     private Button btnPending;
-<<<<<<< HEAD
     private DataManager db = new DataManager(ListActivity.this);
-=======
     private ArrayList<Task> arrayOfTasks;
     private ArrayList<Task> arrayOfDoneTasks;
     private ArrayList<Task> arrayOfUnDoneTasks;
->>>>>>> c6512be884296e5948a3ff896bd7a69a7a2b6336
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
