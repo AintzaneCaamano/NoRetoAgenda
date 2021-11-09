@@ -22,7 +22,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnCancel;
     private Button btnDone;
     private Button btnPending;
-    private DataManager db = new DataManager(ListActivity.this);
+   // private DataManager db = new DataManager(ListActivity.this);
     private ArrayList<Task> arrayOfTasks;
     private ArrayList<Task> arrayOfDoneTasks;
     private ArrayList<Task> arrayOfUnDoneTasks;
