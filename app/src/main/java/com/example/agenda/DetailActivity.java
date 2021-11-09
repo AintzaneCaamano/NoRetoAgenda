@@ -9,7 +9,7 @@ import android.widget.Button;
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnDelete;
     private Button btnModify;
-    private     Button btnExit;
+    private Button btnExit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
