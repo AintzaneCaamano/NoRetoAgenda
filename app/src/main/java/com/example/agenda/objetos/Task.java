@@ -9,10 +9,11 @@ public class Task {
     private String Priority;
     //Este podria ser un enum
     private boolean done;
+    private int userCode;
 
-    Task(){}
+    public Task(){}
 
-    public Task(int cide, String name, String description, String date, String cost, String priority, boolean done) {
+    public Task(int code, String name, String description, String date, String cost, String priority, boolean done) {
         this.code=code;
         this.name = name;
         this.description = description;
@@ -20,6 +21,14 @@ public class Task {
         this.cost = cost;
         Priority = priority;
         this.done = done;
+    }
+
+    public int getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(int userCode) {
+        this.userCode = userCode;
     }
 
     public int getCode() {

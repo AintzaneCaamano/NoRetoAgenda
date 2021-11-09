@@ -55,7 +55,9 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-      Intent intento = new Intent(context, RegisterActivity.class);
+        
+        Intent intento = new Intent(context, DetailActivity.class);
         ((ListActivity)context).startActivityForResult(intento, fifthActivity);
+
     }
 }

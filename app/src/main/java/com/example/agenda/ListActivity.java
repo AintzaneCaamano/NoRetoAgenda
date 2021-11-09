@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.agenda.adapters.TaskAdapter;
+import com.example.agenda.objetos.DataManager;
 import com.example.agenda.objetos.Task;
 
 import java.util.ArrayList;
@@ -14,12 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ListActivity extends AppCompatActivity implements View.OnClickListener{
+public class ListActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
     private ListView listView ;
    // private DataManager db = new DataManager(listActivity.this);
     private Button btnCancel;
     private Button btnDone;
     private Button btnPending;
+    private DataManager db = new DataManager(ListActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +37,14 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
 
         //Adapter
         listView = findViewById(R.id.listV_List_List);
-// Construct the data source
+        // Construct the data source
         ArrayList<Task> arrayOfTasks = new ArrayList();
         Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", "muy importante", false);
-         arrayOfTasks.add(task);
-       // arrayOfUsers.addAll(db.selectAllData());
-// Create the adapter to convert the array to views
+        arrayOfTasks.add(task);
+        arrayOfTasks.addAll(db.selectAllTaskData());
+        // Create the adapter to convert the array to views
         TaskAdapter adapter = new TaskAdapter(this, arrayOfTasks);
-// Attach the adapter to a ListView
+        // Attach the adapter to a ListView
 
         listView.setAdapter(adapter);
 
@@ -59,5 +61,10 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         }else if (v==btnPending){
 
         }
+    }
+ //Atributo posicion lista.get(posicion).get(id) se lo mando al detail
+    @Override
+    public boolean onLongClick(View view) {
+        return false;
     }
 }

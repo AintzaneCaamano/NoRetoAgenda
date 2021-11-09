@@ -1,5 +1,7 @@
 package com.example.agenda.objetos;
 
+import java.util.ArrayList;
+
 public class User {
 
     // Atributos
@@ -52,4 +54,5 @@ public class User {
     public void setRemember(boolean remember) {
         this.remember = remember;
     }
+
 }
