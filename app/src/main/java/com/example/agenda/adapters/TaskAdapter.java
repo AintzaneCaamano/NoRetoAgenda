@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListener {
+public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListener, View.OnLongClickListener{
     public static final int fifthActivity = 5;
     private  TextView txtViewName;
     private Context context;
@@ -55,7 +55,13 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-      Intent intento = new Intent(context, RegisterActivity.class);
+      Intent intento = new Intent(context, DetailActivity.class);
         ((ListActivity)context).startActivityForResult(intento, fifthActivity);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+
+        return false;
     }
 }
