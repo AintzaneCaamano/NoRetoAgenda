@@ -33,12 +33,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnRegister.setOnClickListener(this);
         btnCancel = findViewById(R.id.btn_Register_Cancel);
         btnCancel.setOnClickListener(this);
-        txtName.findViewById(R.id.edtTxt_Register_TName);
-        txtDescription.findViewById(R.id.txtV_Register_Description);
-        txtDate.findViewById(R.id.edtTxt_Register_Date);
-        txtCost.findViewById(R.id.edtTxt_Register_Cost);
-        spinPriority.findViewById(R.id.spinner_Register_Priority);
-        spinDone.findViewById(R.id.spinner_Register_Done);
+        txtName = findViewById(R.id.edtTxt_Register_TName);
+        txtDescription = findViewById(R.id.edtTxt_Register_Description);
+        txtDate = findViewById(R.id.edtTxt_Register_Date);
+        txtCost = findViewById(R.id.edtTxt_Register_Cost);
+        spinPriority = findViewById(R.id.spinner_Register_Priority);
+        spinDone = findViewById(R.id.spinner_Register_Done);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean fillTask(){
+        task = new Task();
         //Rellena el objeto Task con los datos, si falta algun dato importante devuelve false
         boolean ret=true;
         //Recoge los datos y los guarda en un objeto

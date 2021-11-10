@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText_Name = (EditText) findViewById(R.id.edTxt_Main_Name);
         editText_Pass = (EditText) findViewById(R.id.edTxt_Main_Pass);
         remember = findViewById(R.id.checkBx_Main_Remember);
+        Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", "Urgente", false);
+        Task task2 = new Task(2,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", "Media", true);
+        Task task3 = new Task(2,"Comprar bolis", "", "10-11-2021", "15min", "Alta", true);
+        Task task4 = new Task(2,"Repasar examen PM", "", "23-11-2021", "3min", "Alta", false);
+        db.insertTask(task);
+        db.insertTask(task2);
+        db.insertTask(task3);
+        db.insertTask(task4);
+        
         if(isRemembered()){
             openIntent();
         }
@@ -76,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             db.insertTask(task3);
             db.insertTask(task4);
         }
+
 
         return ret;
     }

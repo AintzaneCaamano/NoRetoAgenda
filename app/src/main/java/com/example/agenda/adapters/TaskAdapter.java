@@ -29,6 +29,7 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     public static final int fifthActivity = 5;
     private  TextView txtViewName;
     private Context context;
+    private Task task;
 
     public TaskAdapter(Context context, ArrayList<Task> tasks2) {
         super(context, 0, tasks2);
@@ -40,7 +41,7 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     public View getView(int position, View convertView, ViewGroup parent) {
        // super(itemView);
         // Get the data item for this position
-        Task task = getItem(position);
+         task = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview_layout, parent, false);
@@ -55,8 +56,9 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        Intent intento = new Intent(context, DetailActivity.class);
 
+        Intent intento = new Intent(context, DetailActivity.class);
+        intento.putExtra("task", task.getCode());
         ((ListActivity)context).startActivityForResult(intento, fifthActivity);
 
     }
