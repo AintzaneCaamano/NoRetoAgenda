@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText_Name = null;
     private EditText editText_Pass = null;
     private DataManager db = new DataManager(MainActivity.this);
-
+    private CheckBox remember;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editText_Name = (EditText) findViewById(R.id.edTxt_Main_Name);
         editText_Pass = (EditText) findViewById(R.id.edTxt_Main_Pass);
-
+        remember = findViewById(R.id.checkBx_Main_Remember);
         if(isRemembered()){
             openIntent();
         }
@@ -57,7 +58,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ret = true;
                 i=users.size();
             }
+
         }
+
+        //Añado valores de ejemplo en la base de datos si está vacía
+        if (users.size()==0){
+            User user = new User(1, "Ain", "123", false);
+            User user2 = new User(2, "Alb", "123", false);
+            db.insertUser(user);
+            db.insertUser(user2);
+            Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", "Urgente", false);
+            Task task2 = new Task(2,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", "Media", true);
+            Task task3 = new Task(2,"Comprar bolis", "", "10-11-2021", "15min", "Alta", true);
+            Task task4 = new Task(2,"Repasar examen PM", "", "23-11-2021", "3min", "Alta", false);
+            db.insertTask(task);
+            db.insertTask(task2);
+            db.insertTask(task3);
+            db.insertTask(task4);
+        }
+
         return ret;
     }
 
@@ -73,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ret = true;
                     i=users.size();
                 }
+            }
+            if (remember.isChecked()){
+
             }
         return ret;
         }

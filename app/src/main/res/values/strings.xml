@@ -23,4 +23,10 @@
     <string name="btn_PendingTasks">Tareas Pendientes</string>
     <string name="btn_English">Inglés</string>
     <string name="btn_Spanish">Español</string>
+    <string-array name="spinner_priority">
+        <item>Urgente</item>
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+    </string-array>
 </resources>

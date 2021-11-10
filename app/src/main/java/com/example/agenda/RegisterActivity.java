@@ -44,10 +44,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v==btnRegister){
-            db.insertTask(task);
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, "Tarea Guardada", duration);
-            toast.show();
+            if (fillTask()){
+                db.insertTask(task);
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(this, "Tarea Guardada", duration);
+                toast.show();
+            }else {
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(this, "Faltan datos", duration);
+                toast.show();
+            }
         }
         else if(v== btnCancel){
 
@@ -57,9 +63,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void fillTask(){
+    private boolean fillTask(){
+        //Rellena el objeto Task con los datos, si falta algun dato importante devuelve false
+        boolean ret=true;
         //Recoge los datos y los guarda en un objeto
         String name = txtName.getText().toString();
+        if (name.length()<2){
+            ret=false;
+        }
         String description = txtDescription.getText().toString();
         String date = txtDate.getText().toString();
         String cost = txtCost.getText().toString();
@@ -69,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         task.setDescription(description);
         task.setDate(date);
         task.setCost(cost);
-
-
+        return ret;
     }
 }

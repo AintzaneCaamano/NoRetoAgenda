@@ -44,8 +44,6 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         // Construct the data source
 
         ArrayList<Task> arrayOfTasks = new ArrayList();
-        Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", "muy importante", false);
-        arrayOfTasks.add(task);
         arrayOfTasks.addAll(db.selectAllTaskData());
         // Create the adapter to convert the array to views
         TaskAdapter adapter = new TaskAdapter(this, arrayOfTasks);
