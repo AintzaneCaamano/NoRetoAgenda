@@ -21,12 +21,26 @@
     <string name="txt_Cost">Coste</string>
     <string name="btn_DoneTasks">Tareas Realizadas</string>
     <string name="btn_PendingTasks">Tareas Pendientes</string>
+    <string name="btn_AllTasks">Mostrar Todas</string>
     <string name="btn_English">Inglés</string>
     <string name="btn_Spanish">Español</string>
-    <string-array name="spinner_priority">
-        <item>Urgente</item>
-        <item>Alta</item>
-        <item>Media</item>
-        <item>Baja</item>
-    </string-array>
+    <string name="toast_Erasing">Borrando tarea...</string>
+    <string name="txt_priority0">Urgente</string>
+    <string name="txt_Priority1">Alta</string>
+    <string name="txt_Priority2">Media</string>
+    <string name="txt_Priority3">Baja</string>
+    <string name="txt_Done">Realizada</string>
+    <string name="txt_Undone">Pendiente</string>
+    <string name="toast_Save">Guardando Tarea...</string>
+    <string name="toast_MissingData">Faltan Datos</string>
+    <string name="Bar_Title">Actualizar clave</string>
+    <string name="Bar_OldPass">Contraseña anterior:</string>
+    <string name="Bar_NewPass">Nueva Contraseña</string>
+    <string name="toast_IncorrectUser">El  usuario no está registrado</string>
+    <string name="toast_IncorrectPass">La clave es incorrecta</string>
+    <string name="dlog_List_Title">Borrar Tarea</string>
+    <string name="dlog_List_Msg">¿Estás seguro de querer borrar esta tarea?</string>
+    <string name="btn_Yes">Sí</string>
+    <string name="Toast_BaseDialog_Update">Contraseña actualizada</string>
+    <string name="Toast_BaseDialog_DifferentPass">Las contraseñas no coinciden</string>
 </resources>
