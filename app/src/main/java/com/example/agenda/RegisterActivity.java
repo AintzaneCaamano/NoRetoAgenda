@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.agenda.objetos.DataManager;
 import com.example.agenda.objetos.Task;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnRegister;
@@ -24,7 +27,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinDone;
     private Task task;
     private DataManager db = new DataManager(RegisterActivity.this);
-
+    private String txtModified;
+    private String txtMissing;
+    private String sample;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtCost = findViewById(R.id.edtTxt_Register_Cost);
         spinPriority = findViewById(R.id.spinner_Register_Priority);
         spinDone = findViewById(R.id.spinner_Register_Done);
+        txtModified=getString(R.string.toast_Save);
+        txtMissing = getString(R.string.toast_MissingData);
+        sample = getString(R.string.txt_taskName);
+        fillSpinners();
     }
 
     @Override
@@ -47,11 +56,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (fillTask()){
                 db.insertTask(task);
                 int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this, "Tarea Guardada", duration);
+                Toast toast = Toast.makeText(this, txtModified, duration);
                 toast.show();
             }else {
                 int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this, "Faltan datos", duration);
+                Toast toast = Toast.makeText(this, txtMissing, duration);
                 toast.show();
             }
         }
@@ -69,18 +78,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         boolean ret=true;
         //Recoge los datos y los guarda en un objeto
         String name = txtName.getText().toString();
-        if (name.length()<2){
+        if (name.length()<2 | name.equalsIgnoreCase(sample)){
             ret=false;
         }
         String description = txtDescription.getText().toString();
         String date = txtDate.getText().toString();
         String cost = txtCost.getText().toString();
-        String priority;
-        String Done;
         task.setName(name);
         task.setDescription(description);
         task.setDate(date);
         task.setCost(cost);
+        task.setPriority(spinPriority.getSelectedItemPosition());
+        task.setDone(spinDone.getSelectedItemPosition() == 0 ? false : true);
         return ret;
+    }
+
+    private void fillSpinners() {
+        //Prioridades
+        ArrayList<String> prioritiesName = new ArrayList<>();
+
+        prioritiesName.add(getString(R.string.txt_priority0));
+        prioritiesName.add(getString(R.string.txt_Priority1));
+        prioritiesName.add(getString(R.string.txt_Priority2));
+        prioritiesName.add(getString(R.string.txt_Priority3));
+
+        ArrayAdapter<String> aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, prioritiesName);
+        aAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinPriority.setAdapter(aAdapter);
+
+        //Done
+        ArrayList<String> state = new ArrayList<>();
+        state.add(getString(R.string.txt_Done));
+        state.add(getString(R.string.txt_Undone));
+
+        ArrayAdapter<String> aAdapterDone = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, state);
+        aAdapterDone.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinDone.setAdapter(aAdapterDone);
     }
 }

@@ -2,6 +2,9 @@ package com.example.agenda;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.agenda.adapters.TaskAdapter;
@@ -11,21 +14,28 @@ import com.example.agenda.objetos.Task;
 import java.util.ArrayList;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class ListActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener{
+public class ListActivity extends AppCompatActivity implements View.OnClickListener {
     private ListView listView ;
     private TaskAdapter adapter;
     private DataManager db = new DataManager(this);
     private Button btnCancel;
     private Button btnDone;
     private Button btnPending;
-   // private DataManager db = new DataManager(ListActivity.this);
+    private Button btnAll;
     private ArrayList<Task> arrayOfTasks;
     private ArrayList<Task> arrayOfDoneTasks;
-    private ArrayList<Task> arrayOfUnDoneTasks;
+    private ArrayList<Task> arrayOfPendingTasks;
+    Task task;
+    public static final int fifthActivity = 5;
+    public String erasing;
+    public boolean longC;
+    public boolean erase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,53 +47,117 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         btnDone.setOnClickListener(this);
         btnPending = findViewById(R.id.btn_List_Pending);
         btnPending.setOnClickListener(this);
-
-
+        btnAll = findViewById(R.id.btn_List_AllTasks);
+        btnAll.setOnClickListener(this);
+        erasing = getString(R.string.toast_Erasing);
+        longC=false;
         //Adapter
         listView = findViewById(R.id.listV_List_List);
         // Construct the data source
 
-        ArrayList<Task> arrayOfTasks = new ArrayList();
-        arrayOfTasks.addAll(db.selectAllTaskData());
-        // Create the adapter to convert the array to views
-        TaskAdapter adapter = new TaskAdapter(this, arrayOfTasks);
+        showPendingTasks();
 
-        // Attach the adapter to a ListView
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(!longC){
+                Intent intento = new Intent(getApplicationContext(), DetailActivity.class);
+                task =(Task) listView.getItemAtPosition(position);
+                intento.putExtra("task", task.getCode() );
+                startActivityForResult(intento, fifthActivity);
+                }
+            }
+        });
 
-        listView.setAdapter(adapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                longC=true;
+                task =(Task) listView.getItemAtPosition(position);
+                createListDialog();
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showPendingTasks();
 
     }
 
     @Override
     public void onClick(View v) {
         if (v==btnCancel){
-            //Intent intent2 = new Intent();
             setResult(RESULT_OK);
             finish();
         }else if (v == btnDone){
-            arrayOfDoneTasks = new ArrayList();
-            for (int i = 0; i<arrayOfTasks.size(); i++){
-                if (arrayOfTasks.get(i).isDone()){
-                    arrayOfDoneTasks.add(arrayOfTasks.get(i));
-                }
-            }
-            adapter = new TaskAdapter(this, arrayOfDoneTasks);
-            adapter.notifyDataSetChanged();
-
+            showDoneTasks();
         }else if (v==btnPending){
-            arrayOfUnDoneTasks = new ArrayList();
-            for (int i = 0; i<arrayOfTasks.size(); i++){
-                if (!arrayOfTasks.get(i).isDone()){
-                    arrayOfUnDoneTasks.add(arrayOfTasks.get(i));
-                }
-            }
-            adapter = new TaskAdapter(this, arrayOfUnDoneTasks);
-            adapter.notifyDataSetChanged();
+            showPendingTasks();
+        }else if (v==btnAll){
+            showAll();
         }
     }
- //Atributo posicion lista.get(posicion).get(id) se lo mando al detail
-    @Override
-    public boolean onLongClick(View view) {
-        return false;
+
+    private void showPendingTasks(){
+        arrayOfPendingTasks = db.selectTaskByStatus(false);
+        adapter = new TaskAdapter(this, arrayOfPendingTasks);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        btnDone.setEnabled(true);
+        btnPending.setEnabled(false);
+        btnAll.setEnabled(true);
     }
+
+    private void showDoneTasks(){
+        arrayOfDoneTasks = db.selectTaskByStatus(true);
+        adapter = new TaskAdapter(this, arrayOfDoneTasks);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        btnDone.setEnabled(false);
+        btnPending.setEnabled(true);
+        btnAll.setEnabled(true);
+    }
+    private void showAll(){
+        arrayOfTasks=db.selectAllTaskData();
+        adapter = new TaskAdapter(this, arrayOfTasks);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        btnDone.setEnabled(true);
+        btnPending.setEnabled(true);
+        btnAll.setEnabled(false);
+    }
+
+    private void printToast(){
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this, erasing, duration);
+        toast.show();
+    }
+
+    public void createListDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
+        builder.setMessage(R.string.dlog_List_Msg).setTitle(R.string.dlog_List_Title);
+        builder.setPositiveButton(R.string.btn_Yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                erase();
+                longC=false;
+            }
+        });
+        builder.setNegativeButton(R.string.btn_Cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                longC=false;
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void erase(){
+        db.deleteTask(task.getCode());
+        printToast();
+        showAll();
+        longC=false;
+    }
+
 }

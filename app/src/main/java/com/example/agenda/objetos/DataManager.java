@@ -39,7 +39,7 @@ public class DataManager extends SQLiteOpenHelper {
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_USER_NAME + " TEXT NOT NULL, "
             + COLUMN_USER_PASSWORD + " TEXT NOT NULL, "
-            + COLUMN_USER_REMEMBER + " TEXT NOT NULL " // ojo aqui, realmente es un boolean, tiene que ser un Integer con valor 0 o 1
+            + COLUMN_USER_REMEMBER + " INTEGER NOT NULL " // ojo aqui, realmente es un boolean, tiene que ser un Integer con valor 0 o 1
             + ");";
 
     // Nombre de la tabla Tarea
@@ -63,8 +63,8 @@ public class DataManager extends SQLiteOpenHelper {
             + COLUMN_TASK_DATE + " TEXT NOT NULL, "
             + COLUMN_TASK_COST + " TEXT NOT NULL, "
             + COLUMN_TASK_PRIORITY + " TEXT NOT NULL, "
-            + COLUMN_TASK_STATUS + " TEXT NOT NULL, "
-            + COLUMN_TASK_USERCODE+"TEXT NOT NULL "
+            + COLUMN_TASK_STATUS + " INTEGER NOT NULL, "
+            + COLUMN_TASK_USERCODE+"TEXT "
             + ");";
 
 
@@ -73,7 +73,91 @@ public class DataManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TASK);
+        fillDB(sqLiteDatabase);
+    }
+    private void fillDB(SQLiteDatabase sqLiteDatabase){
+        User user = new User(1, "Ain", "123", true);
+        User user2 = new User(2, "Alb", "123", false);
 
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NAME, user.getName());
+        values.put(COLUMN_USER_PASSWORD, user.getPass());
+        // **
+        int remem = 0;
+        if (user.isRemember()){
+            remem = 1;
+        }
+        values.put(COLUMN_USER_REMEMBER, remem );
+        sqLiteDatabase.insert(USER_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_USER_NAME, user2.getName());
+        values.put(COLUMN_USER_PASSWORD, user2.getPass());
+
+        remem = 0;
+        if (user2.isRemember()){
+            remem = 1;
+        }
+        values.put(COLUMN_USER_REMEMBER, remem );
+        sqLiteDatabase.insert(USER_TABLE_NAME, null, values);
+
+        Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", 1, false);
+        Task task2 = new Task(2,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", 2, true);
+        Task task3 = new Task(3,"Comprar bolis", "", "10-11-2021", "15min", 3, true);
+        Task task4 = new Task(4,"Repasar examen PM", "", "23-11-2021", "3min", 1, false);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task.getDescription());
+        values.put(COLUMN_TASK_DATE, task.getDate());
+        values.put(COLUMN_TASK_COST, task.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task.getPriority());
+        int done = 0;
+        if (task.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task2.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task2.getDescription());
+        values.put(COLUMN_TASK_DATE, task2.getDate());
+        values.put(COLUMN_TASK_COST, task2.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task2.getPriority());
+         done = 0;
+        if (task2.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task3.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task3.getDescription());
+        values.put(COLUMN_TASK_DATE, task3.getDate());
+        values.put(COLUMN_TASK_COST, task3.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task3.getPriority());
+        done = 0;
+        if (task3.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task4.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task4.getDescription());
+        values.put(COLUMN_TASK_DATE, task4.getDate());
+        values.put(COLUMN_TASK_COST, task4.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task4.getPriority());
+        done = 0;
+        if (task4.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        //sQLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
     }
 
     @Override
@@ -114,7 +198,6 @@ public class DataManager extends SQLiteOpenHelper {
 
     //------------------------------ selectAll ------------------------------//
     public ArrayList<Task> selectAllTaskData(){
-
         ArrayList<Task> ret = new ArrayList<Task>();
         String query = "SELECT * FROM " + TASK_TABLE_NAME;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
@@ -128,8 +211,8 @@ public class DataManager extends SQLiteOpenHelper {
             task.setDescription(cursor.getString(2));
             task.setDate(cursor.getString(3));
             task.setCost(cursor.getString(4));
-            task.setPriority(cursor.getString(5));
-            int status = Integer.parseInt(cursor.getString(6));
+            task.setPriority(cursor.getInt(5));
+            int status = cursor.getInt(6);
             boolean done=false;
             if (status==1){
                 done=true;
@@ -141,8 +224,8 @@ public class DataManager extends SQLiteOpenHelper {
         sQLiteDatabase.close();
         return ret;
     }
-    public ArrayList<User> selectAllUserData(){
 
+    public ArrayList<User> selectAllUserData(){
         ArrayList<User> ret = new ArrayList<User>();
         String query = "SELECT * FROM " + USER_TABLE_NAME;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
@@ -154,13 +237,61 @@ public class DataManager extends SQLiteOpenHelper {
             user.setCode(code);
             user.setName(cursor.getString(1));
             user.setPass(cursor.getString(2));
-            int remmeber = Integer.parseInt(cursor.getString(3));
+            int remmeber = cursor.getInt(3);
             boolean done=false;
             if (remmeber==1){
                 done=true;
             }
             user.setRemember(done);
             ret.add(user);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+//------------------------------ select by ID ------------------------------//
+
+    public Task selectTaskById(int id){
+        Task ret = new Task();
+        String query = "SELECT * FROM " + TASK_TABLE_NAME + " WHERE id = "+ id ;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+
+        while(cursor.moveToNext()){
+            ret.setCode( cursor.getInt(0));
+            ret.setName(cursor.getString(1));
+            ret.setDescription(cursor.getString(2));
+            ret.setDate(cursor.getString(3));
+            ret.setCost(cursor.getString(4));
+            ret.setPriority(cursor.getInt(5));
+            int status = Integer.parseInt(cursor.getString(6));
+            boolean done=false;
+            if (status==1){
+                done=true;
+            }
+            ret.setDone(done);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
+    public User selectUserById(int id){
+        User ret = new User();
+        String query = "SELECT * FROM " + USER_TABLE_NAME + " WHERE id = "+ id ;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+
+        while(cursor.moveToNext()){
+            ret.setCode( cursor.getInt(0));
+            ret.setName(cursor.getString(1));
+            ret.setPass(cursor.getString(2));
+            int status = Integer.parseInt(cursor.getString(3));
+            boolean done=false;
+            if (status==1){
+                done=true;
+            }
+            ret.setRemember(done);
         }
         cursor.close();
         sQLiteDatabase.close();
@@ -198,6 +329,82 @@ public class DataManager extends SQLiteOpenHelper {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         sQLiteDatabase.insert(USER_TABLE_NAME, null, values);
         sQLiteDatabase.close();
+    }
+//------------------------------ select task by status ------------------------------//
+    public ArrayList<Task> selectTaskByStatus(boolean status){
+        String estatus="0";
+        ArrayList<Task> ret = new ArrayList<Task>();
+        if(status){
+            estatus="1";
+        }
+
+        String query = "SELECT * FROM " + TASK_TABLE_NAME + " where " + COLUMN_TASK_STATUS + " = " +estatus;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+        Task task;
+        while(cursor.moveToNext()){
+            task = new Task();
+            int code = Integer.parseInt(cursor.getString(0));
+            task.setCode(code);
+            task.setName(cursor.getString(1));
+            task.setDescription(cursor.getString(2));
+            task.setDate(cursor.getString(3));
+            task.setCost(cursor.getString(4));
+            task.setPriority(cursor.getInt(5));
+            int status2 = Integer.parseInt(cursor.getString(6));
+            boolean done=false;
+            if (status2==1){
+                done=true;
+            }
+            task.setDone(done);
+            ret.add(task);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
+    //------------------------------ Update ------------------------------//
+    public boolean updateTask(Task task) {
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_TASK_NAME, task.getName());
+        args.put(COLUMN_TASK_DESCRIPTION, task.getDescription());
+        args.put(COLUMN_TASK_DATE, task.getDate());
+        args.put(COLUMN_TASK_COST, task.getCost());
+        args.put(COLUMN_TASK_PRIORITY,  task.getPriority());
+
+        int done = 0;
+        if (task.isDone()){
+            done = 1;
+        }
+        args.put(COLUMN_TASK_STATUS, done);
+        String whereClause = COLUMN_TASK_ID + "=" + task.getCode();
+        return sQLiteDatabase.update(TASK_TABLE_NAME, args, whereClause, null) > 0;
+    }
+
+    public boolean updateUser(User user) {
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_USER_NAME, user.getName());
+        args.put(COLUMN_USER_PASSWORD, user.getPass());
+
+        int remem = 0;
+        if (user.isRemember()){
+            remem = 1;
+        }
+        args.put(COLUMN_USER_REMEMBER, remem);
+        String whereClause = COLUMN_USER_ID + "=" + user.getCode();
+        return sQLiteDatabase.update(USER_TABLE_NAME, args, whereClause, null) > 0;
+    }
+    //------------------------------ Delete ------------------------------//
+
+    public void deleteTask (int id) {
+       SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+       sQLiteDatabase.delete(TASK_TABLE_NAME, COLUMN_TASK_ID + "=?",
+                new String[] {
+                        String.valueOf(id)
+                });
+       sQLiteDatabase.close();
     }
 
 }

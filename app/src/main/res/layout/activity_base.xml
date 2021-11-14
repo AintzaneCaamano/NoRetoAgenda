@@ -8,9 +8,11 @@
 
     <Button
         android:id="@+id/btn_Base_Register"
-        android:layout_width="243dp"
+        android:layout_width="250dp"
         android:layout_height="70dp"
+        android:backgroundTint="#009688"
         android:text="@string/btn_AddRegister"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,9 +21,11 @@
 
     <Button
         android:id="@+id/btn_Base_List"
-        android:layout_width="243dp"
+        android:layout_width="250dp"
         android:layout_height="70dp"
+        android:backgroundTint="#009688"
         android:text="@string/btn_ShowList"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,9 +34,11 @@
 
     <Button
         android:id="@+id/btn_Base_Exit"
-        android:layout_width="243dp"
+        android:layout_width="250dp"
         android:layout_height="70dp"
+        android:backgroundTint="#009688"
         android:text="@string/btn_Exit"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,15 +47,17 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="413dp"
-        android:layout_height="85dp"
-        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/teal_700"
+        android:backgroundTint="#009688"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

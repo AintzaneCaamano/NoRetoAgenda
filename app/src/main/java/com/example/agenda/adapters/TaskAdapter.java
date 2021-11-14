@@ -25,8 +25,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListener, View.OnLongClickListener{
-    public static final int fifthActivity = 5;
+public class TaskAdapter extends ArrayAdapter<Task>{
     private  TextView txtViewName;
     private Context context;
     private Task task;
@@ -48,24 +47,10 @@ public class TaskAdapter extends ArrayAdapter<Task> implements View.OnClickListe
         }
         // Lookup view for data population
         txtViewName= (TextView) convertView.findViewById(R.id.txtV_listviewlyo_name);
-        txtViewName.setOnClickListener((View.OnClickListener) this);
+
         // Populate the data into the template view using the data object
         txtViewName.setText(task.getName());
         // Return the completed view to render on screen
         return convertView;
-    }
-    @Override
-    public void onClick(View v) {
-
-        Intent intento = new Intent(context, DetailActivity.class);
-        intento.putExtra("task", task.getCode());
-        ((ListActivity)context).startActivityForResult(intento, fifthActivity);
-
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-
-        return false;
     }
 }

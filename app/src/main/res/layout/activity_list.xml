@@ -8,47 +8,68 @@
 
     <ListView
         android:id="@+id/listV_List_List"
-        android:layout_width="331dp"
-        android:layout_height="480dp"
+        android:layout_width="332dp"
+        android:layout_height="403dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <Button
-        android:id="@+id/btn_List_Cancel"
-        android:layout_width="126dp"
-        android:layout_height="70dp"
-        android:text="@string/btn_Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.335" />
 
     <Button
         android:id="@+id/btn_List_Pending"
-        android:layout_width="126dp"
-        android:layout_height="70dp"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#009688"
         android:text="@string/btn_PendingTasks"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.848"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.81" />
+
+    <Button
+        android:id="@+id/btn_List_Cancel"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/btn_Cancel"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927" />
+
+    <Button
+        android:id="@+id/btn_List_AllTasks"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#009688"
+        android:text="@string/btn_AllTasks"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927" />
 
     <Button
         android:id="@+id/btn_List_Done"
-        android:layout_width="126dp"
-        android:layout_height="70dp"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#009688"
         android:text="@string/btn_DoneTasks"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.81" />
 </androidx.constraintlayout.widget.ConstraintLayout>

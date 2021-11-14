@@ -5,8 +5,11 @@
 
     <TextView
         android:id="@+id/txtV_listviewlyo_name"
-        android:layout_width="207dp"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_userName" />
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/txt_userName"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agenda</string>
+    <string name="txt_userName">Nombre</string>
+    <string name="txt_pass">Clave</string>
+    <string name="txt_ChangePass">Cambiar Contraseña</string>
+    <string name="checkBx_Remember">Recuérdame</string>
+    <string name="btn_LogIn">Iniciar Sesión</string>
+    <string name="btn_LogOut">Cerrar Sesión</string>
+    <string name="btn_AddRegister">Nuevo Registro</string>
+    <string name="btn_ShowList">Mostrar Listado</string>
+    <string name="btn_Exit">Salir</string>
+    <string name="btn_Cancel">Cancelar</string>
+    <string name="btn_Modify">Modificar</string>
+    <string name="btn_Erase">Borrar</string>
+    <string name="btn_Register">Registrar</string>
+    <string name="txt_taskTitle">Tarea:</string>
+    <string name="txt_taskName">Nombre de la tarea</string>
+    <string name="txt_Description">Descripción</string>
+    <string name="txt_Date">Fecha</string>
+    <string name="txt_Cost">Coste</string>
+    <string name="btn_DoneTasks">Tareas Realizadas</string>
+    <string name="btn_PendingTasks">Tareas Pendientes</string>
+    <string name="btn_AllTasks">Mostrar Todas</string>
+    <string name="btn_English">Inglés</string>
+    <string name="btn_Spanish">Español</string>
+    <string name="toast_Erasing">Borrando tarea...</string>
+    <string name="txt_priority0">Urgente</string>
+    <string name="txt_Priority1">Alta</string>
+    <string name="txt_Priority2">Media</string>
+    <string name="txt_Priority3">Baja</string>
+    <string name="txt_Done">Realizada</string>
+    <string name="txt_Undone">Pendiente</string>
+    <string name="toast_Save">Guardando Tarea...</string>
+    <string name="toast_MissingData">Faltan Datos</string>
+    <string name="Bar_Title">Actualizar clave</string>
+    <string name="Bar_OldPass">Contraseña anterior:</string>
+    <string name="Bar_NewPass">Nueva Contraseña</string>
+    <string name="toast_IncorrectUser">El  usuario no está registrado</string>
+    <string name="toast_IncorrectPass">La clave es incorrecta</string>
+    <string name="dlog_List_Title">Borrar Tarea</string>
+    <string name="dlog_List_Msg">¿Estás seguro de querer borrar esta tarea?</string>
+    <string name="btn_Yes">Sí</string>
+    <string name="Toast_BaseDialog_Update">Contraseña actualizada</string>
+    <string name="Toast_BaseDialog_DifferentPass">Las contraseñas no coinciden</string>
+</resources>

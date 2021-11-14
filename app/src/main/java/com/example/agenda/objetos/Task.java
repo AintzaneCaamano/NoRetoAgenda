@@ -6,14 +6,14 @@ public class Task {
     private String description;
     private String date;
     private String cost;
-    private String Priority;
+    private int Priority;
     //Este podria ser un enum
     private boolean done;
     private int userCode;
 
     public Task(){}
 
-    public Task(int code, String name, String description, String date, String cost, String priority, boolean done) {
+    public Task(int code, String name, String description, String date, String cost, int priority, boolean done) {
         this.code=code;
         this.name = name;
         this.description = description;
@@ -55,7 +55,7 @@ public class Task {
         return cost;
     }
 
-    public String getPriority() {
+    public int getPriority() {
         return Priority;
     }
 
@@ -79,7 +79,7 @@ public class Task {
         this.cost = cost;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         Priority = priority;
     }
 

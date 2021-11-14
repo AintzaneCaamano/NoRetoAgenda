@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agenda</string>
+    <string name="txt_userName">Name</string>
+    <string name="txt_pass">Key</string>
+    <string name="txt_ChangePass">Change Password</string>
+    <string name="checkBx_Remember">Remember me</string>
+    <string name="btn_LogIn">Log In</string>
+    <string name="btn_LogOut">Log Out</string>
+    <string name="btn_AddRegister">New Register</string>
+    <string name="btn_ShowList">Show List</string>
+    <string name="btn_Exit">Exit</string>
+    <string name="btn_Cancel">Cancel</string>
+    <string name="btn_Modify">Modify</string>
+    <string name="btn_Erase">Erase</string>
+    <string name="btn_Register">Register</string>
+    <string name="txt_taskTitle">Task:</string>
+    <string name="txt_taskName">Task\'s name</string>
+    <string name="txt_Description">Description</string>
+    <string name="txt_Date">Date</string>
+    <string name="txt_Cost">Cost</string>
+    <string name="btn_DoneTasks">Finished Tasks</string>
+    <string name="btn_PendingTasks">Pending Tasks</string>
+    <string name="btn_AllTasks">Show All</string>
+    <string name="btn_English">English</string>
+    <string name="btn_Spanish">Spanish</string>
+    <string name="toast_Erasing">Deleting task...</string>
+    <string name="txt_priority0">Urgent</string>
+    <string name="txt_Priority1">High</string>
+    <string name="txt_Priority2">Medium</string>
+    <string name="txt_Priority3">Low</string>
+    <string name="txt_Done">Done</string>
+    <string name="txt_Undone">Pending</string>
+    <string name="toast_Save">Saving task...</string>
+    <string name="toast_MissingData">Some data is missing</string>
+    <string name="Bar_Title">Change Password</string>
+    <string name="Bar_OldPass">Old Password</string>
+    <string name="Bar_NewPass">New Password</string>
+    <string name="toast_IncorrectUser">User is not registered</string>
+    <string name="toast_IncorrectPass">Incorrect password</string>
+    <string name="dlog_List_Title">Delete Task</string>
+    <string name="dlog_List_Msg">Do you want to delete this task?</string>
+    <string name="btn_Yes">Yes</string>
+    <string name="Toast_BaseDialog_Update">Password is updated</string>
+    <string name="Toast_BaseDialog_DifferentPass">New passwords don\'t match</string>
+</resources>
