@@ -53,9 +53,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == btnList){
             Intent intento = new Intent(BaseActivity.this, ListActivity.class);
+            intento.putExtra("user", user.getCode() );
             startActivityForResult(intento, thirdActivity);
         }else if (v == btnRegister){
             Intent intento = new Intent(BaseActivity.this, RegisterActivity.class);
+            intento.putExtra("user", user.getCode() );
             startActivityForResult(intento, fourthActivity);
         }else if (v == btnExit){
             //Intent intent2 = new Intent();

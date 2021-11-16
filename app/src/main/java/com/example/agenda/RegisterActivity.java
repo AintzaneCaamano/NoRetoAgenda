@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.agenda.objetos.DataManager;
 import com.example.agenda.objetos.Task;
+import com.example.agenda.objetos.User;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String txtModified;
     private String txtMissing;
     private String sample;
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         txtMissing = getString(R.string.toast_MissingData);
         sample = getString(R.string.txt_taskName);
         fillSpinners();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user = db.selectUserById(extras.getInt("user"));
+        }
     }
 
     @Override
@@ -90,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         task.setCost(cost);
         task.setPriority(spinPriority.getSelectedItemPosition());
         task.setDone(spinDone.getSelectedItemPosition() == 0 ? false : true);
+        task.setUserCode(user.getCode());
         return ret;
     }
 

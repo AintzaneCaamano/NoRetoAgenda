@@ -64,7 +64,7 @@ public class DataManager extends SQLiteOpenHelper {
             + COLUMN_TASK_COST + " TEXT NOT NULL, "
             + COLUMN_TASK_PRIORITY + " TEXT NOT NULL, "
             + COLUMN_TASK_STATUS + " INTEGER NOT NULL, "
-            + COLUMN_TASK_USERCODE+"TEXT "
+            + COLUMN_TASK_USERCODE+" INTEGER NOT NULL "
             + ");";
 
 
@@ -101,10 +101,14 @@ public class DataManager extends SQLiteOpenHelper {
         values.put(COLUMN_USER_REMEMBER, remem );
         sqLiteDatabase.insert(USER_TABLE_NAME, null, values);
 
-        Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", 1, false);
-        Task task2 = new Task(2,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", 2, true);
-        Task task3 = new Task(3,"Comprar bolis", "", "10-11-2021", "15min", 3, true);
-        Task task4 = new Task(4,"Repasar examen PM", "", "23-11-2021", "3min", 1, false);
+        Task task = new Task(1,"Acabar el repaso", "el repaso esta en moodle", "13-11-2021", "2h", 1, false,1);
+        Task task2 = new Task(2,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", 2, true,1);
+        Task task3 = new Task(3,"Comprar bolis", "", "10-11-2021", "15min", 3, true,1);
+        Task task4 = new Task(4,"Repasar examen PM", "", "23-11-2021", "3min", 1, false,2);
+        Task task5 = new Task(5,"Comprar regalo ama", "antes de la 18.00", "13-11-2021", "2h", 1, false,2);
+        Task task6 = new Task(6,"Ejercicio 03 PMP", "Poner comentarios en todos los métodos", "20-11-2021", "3h", 2, true,1);
+        Task task7 = new Task(7,"Ejercicio de PSP", "Los hilos tienen que incluir un boolean", "10-11-2021", "15min", 3, true,2);
+
         // **
         values = new ContentValues();
         values.put(COLUMN_TASK_NAME, task.getName());
@@ -117,6 +121,7 @@ public class DataManager extends SQLiteOpenHelper {
             done = 1;
         }
         values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task.getUserCode());
         sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
         // **
         values = new ContentValues();
@@ -130,6 +135,7 @@ public class DataManager extends SQLiteOpenHelper {
             done = 1;
         }
         values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task2.getUserCode());
         sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
         // **
         values = new ContentValues();
@@ -143,6 +149,7 @@ public class DataManager extends SQLiteOpenHelper {
             done = 1;
         }
         values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task3.getUserCode());
         sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
         // **
         values = new ContentValues();
@@ -156,6 +163,49 @@ public class DataManager extends SQLiteOpenHelper {
             done = 1;
         }
         values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task4.getUserCode());
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task5.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task5.getDescription());
+        values.put(COLUMN_TASK_DATE, task5.getDate());
+        values.put(COLUMN_TASK_COST, task5.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task5.getPriority());
+        done = 0;
+        if (task5.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task5.getUserCode());
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+// **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task6.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task6.getDescription());
+        values.put(COLUMN_TASK_DATE, task6.getDate());
+        values.put(COLUMN_TASK_COST, task6.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task6.getPriority());
+        done = 0;
+        if (task6.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task6.getUserCode());
+        sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
+        // **
+        values = new ContentValues();
+        values.put(COLUMN_TASK_NAME, task7.getName());
+        values.put(COLUMN_TASK_DESCRIPTION, task7.getDescription());
+        values.put(COLUMN_TASK_DATE, task7.getDate());
+        values.put(COLUMN_TASK_COST, task7.getCost());
+        values.put(COLUMN_TASK_PRIORITY, task7.getPriority());
+        done = 0;
+        if (task7.isDone()){
+            done = 1;
+        }
+        values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE,task7.getUserCode());
         //sQLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.insert(TASK_TABLE_NAME, null, values);
     }
@@ -197,9 +247,9 @@ public class DataManager extends SQLiteOpenHelper {
     }
 
     //------------------------------ selectAll ------------------------------//
-    public ArrayList<Task> selectAllTaskData(){
+    public ArrayList<Task> selectAllTaskData(int user){
         ArrayList<Task> ret = new ArrayList<Task>();
-        String query = "SELECT * FROM " + TASK_TABLE_NAME;
+        String query = "SELECT * FROM " + TASK_TABLE_NAME + " WHERE " + COLUMN_TASK_USERCODE + " = "+ user;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
         Task task;
@@ -218,6 +268,7 @@ public class DataManager extends SQLiteOpenHelper {
                 done=true;
             }
             task.setDone(done);
+            task.setUserCode(cursor.getInt(7));
             ret.add(task);
         }
         cursor.close();
@@ -271,6 +322,7 @@ public class DataManager extends SQLiteOpenHelper {
                 done=true;
             }
             ret.setDone(done);
+            ret.setUserCode(cursor.getInt(7));
         }
         cursor.close();
         sQLiteDatabase.close();
@@ -311,6 +363,7 @@ public class DataManager extends SQLiteOpenHelper {
             done = 1;
         }
         values.put(COLUMN_TASK_STATUS, done);
+        values.put(COLUMN_TASK_USERCODE, task.getUserCode());
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         sQLiteDatabase.insert(TASK_TABLE_NAME, null, values);
         sQLiteDatabase.close();
@@ -331,14 +384,14 @@ public class DataManager extends SQLiteOpenHelper {
         sQLiteDatabase.close();
     }
 //------------------------------ select task by status ------------------------------//
-    public ArrayList<Task> selectTaskByStatus(boolean status){
+    public ArrayList<Task> selectTaskByStatus(boolean status, int user){
         String estatus="0";
         ArrayList<Task> ret = new ArrayList<Task>();
         if(status){
             estatus="1";
         }
 
-        String query = "SELECT * FROM " + TASK_TABLE_NAME + " where " + COLUMN_TASK_STATUS + " = " +estatus;
+        String query = "SELECT * FROM " + TASK_TABLE_NAME + " where " + COLUMN_TASK_STATUS + " = " +estatus + " AND " + COLUMN_TASK_USERCODE + " = " + user;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
         Task task;
@@ -357,6 +410,7 @@ public class DataManager extends SQLiteOpenHelper {
                 done=true;
             }
             task.setDone(done);
+            task.setUserCode(cursor.getInt(7));
             ret.add(task);
         }
         cursor.close();

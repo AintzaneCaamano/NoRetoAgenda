@@ -13,7 +13,7 @@ public class Task {
 
     public Task(){}
 
-    public Task(int code, String name, String description, String date, String cost, int priority, boolean done) {
+   /* public Task(int code, String name, String description, String date, String cost, int priority, boolean done) {
         this.code=code;
         this.name = name;
         this.description = description;
@@ -21,6 +21,16 @@ public class Task {
         this.cost = cost;
         Priority = priority;
         this.done = done;
+    }*/
+    public Task(int code, String name, String description, String date, String cost, int priority, boolean done, int user) {
+        this.code=code;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.cost = cost;
+        this.Priority = priority;
+        this.done = done;
+        this.userCode=user;
     }
 
     public int getUserCode() {

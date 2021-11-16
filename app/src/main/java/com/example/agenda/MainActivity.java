@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         remember = findViewById(R.id.checkBx_Main_Remember);
 
         //Reiniciar la base de datos
-        //db.onUpgrade(db.getWritableDatabase(),1,2);
+        db.onUpgrade(db.getWritableDatabase(),1,2);
 
         isRemembered();
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.example.agenda.adapters.TaskAdapter;
 import com.example.agenda.objetos.DataManager;
 import com.example.agenda.objetos.Task;
+import com.example.agenda.objetos.User;
 
 import java.util.ArrayList;
 import android.content.Intent;
@@ -30,7 +31,8 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Task> arrayOfTasks;
     private ArrayList<Task> arrayOfDoneTasks;
     private ArrayList<Task> arrayOfPendingTasks;
-    Task task;
+    private Task task;
+    private User user;
     public static final int fifthActivity = 5;
     public String erasing;
     public boolean longC;
@@ -51,9 +53,13 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         btnAll.setOnClickListener(this);
         erasing = getString(R.string.toast_Erasing);
         longC=false;
-        //Adapter
+
         listView = findViewById(R.id.listV_List_List);
-        // Construct the data source
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user = db.selectUserById(extras.getInt("user"));
+        }
 
         showPendingTasks();
 
@@ -102,7 +108,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showPendingTasks(){
-        arrayOfPendingTasks = db.selectTaskByStatus(false);
+        arrayOfPendingTasks = db.selectTaskByStatus(false, user.getCode());
         adapter = new TaskAdapter(this, arrayOfPendingTasks);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -112,7 +118,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showDoneTasks(){
-        arrayOfDoneTasks = db.selectTaskByStatus(true);
+        arrayOfDoneTasks = db.selectTaskByStatus(true, user.getCode());
         adapter = new TaskAdapter(this, arrayOfDoneTasks);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -121,7 +127,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         btnAll.setEnabled(true);
     }
     private void showAll(){
-        arrayOfTasks=db.selectAllTaskData();
+        arrayOfTasks=db.selectAllTaskData(user.getCode());
         adapter = new TaskAdapter(this, arrayOfTasks);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
