@@ -26,6 +26,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private User user;
     public static final int thirdActivity = 3;
     public static final int fourthActivity = 4;
+    public static final int sixthActivity = 6;
     private DataManager db = new DataManager(BaseActivity.this);
 
     @Override
@@ -73,54 +74,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            createListDialog();
+            Intent intento = new Intent(BaseActivity.this, activity_change_password.class);
+            intento.putExtra("user", user.getCode() );
+            startActivityForResult(intento, sixthActivity);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void createListDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
-        LayoutInflater inflater = BaseActivity.this.getLayoutInflater();
-
-        builder.setView(inflater.inflate(R.layout.dialog_signin, null))
-                .setPositiveButton(R.string.btn_Yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-/*
-                        EditText oldPass = findViewById(R.id.edtTxt_BaseDialog_OldPass);
-                        EditText newPass = findViewById(R.id.edtTxt_BaseDialog_NewPass);
-                        EditText newPass2 = findViewById(R.id.edtTxt_BaseDialog_NewPass2);
-
-                        String oldCode = oldPass.getText().toString();
-                        String newCode= newPass.getText().toString();
-                        String newCode2 = newPass2.getText().toString();
-                        if (user.getPass().equals(oldCode)){
-                            if(newCode.equals(newCode2)){
-                            user.setPass(newCode);
-                            db.updateUser(user);
-                                showToast(getString(R.string.Toast_BaseDialog_Update));
-                            }else {
-                                showToast(getString(R.string.Toast_BaseDialog_DifferentPass));
-                            }
-                        }else {
-                            showToast(getString(R.string.toast_IncorrectPass));
-                        }
-                    */}
-                })
-                .setNegativeButton(R.string.btn_Cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private void showToast(String msg){
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this, msg, duration);
-        toast.show();
-    }
 }
